@@ -280,12 +280,16 @@ let g:LatexBox_fold_envs=1
 let g:LatexBox_fold_preamble=1
 let g:LatexBox_split_width=20
 let g:LatexBox_latexmk_options="-pdflatex='pdflatex' -pdf"
-let g:LatexBox_show_warnings = 0
+let g:LatexBox_viewer="okular"
+let g:LatexBox_quickfix=2
 let g:LatexBox_split_width = 20
-" }}}
-" vim-orgmode {{{
-" Setting agenda files for org-mode
-let g:org_agenda_files = ['~/org/*.org']
+
+imap <buffer> [[ \begin{
+imap <buffer> ]] <Plug>LatexCloseCurEnv
+nmap <buffer> <F5> <Plug>LatexChangeEnv
+vmap <buffer> <F7> <Plug>LatexWrapSelection
+vmap <buffer> <S-F7> <Plug>LatexEnvWrapSelection
+imap <buffer> (( \eqref{
 " }}}
 
 " }}}
