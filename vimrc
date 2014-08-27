@@ -5,6 +5,7 @@
 " Preamble ---------------------------------------------------------------- {{{
 
 filetype off
+runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 filetype plugin indent on
 set nocompatible
@@ -291,7 +292,17 @@ vmap <buffer> <F7> <Plug>LatexWrapSelection
 vmap <buffer> <S-F7> <Plug>LatexEnvWrapSelection
 imap <buffer> (( \eqref{
 " }}}
+" Ultisnips {{{
+"let g:UltiSnipsEditSplit="vertical"
+" Else there is a conflict with the builtin
+let g:UltSnipsSnippetDirectories=["ultisnips-snippets"]
+inoremap <c-x><c-k> <c-x><c-k>
 
+" }}}
+" Startify {{{
+let g:startify_bookmarks = ['~/.vimrc', '~/.tmux.conf']
+let g:startify_custom_header =
+    \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
 " }}}
 " Mini-plugins ------------------------------------------------------------ {{{
 " Stuff that should probably be broken out into plugins, but hasn't proved to be

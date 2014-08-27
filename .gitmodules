@@ -46,3 +46,9 @@
 [submodule "vim/bundle/tmuxify"]
 	path = vim/bundle/tmuxify
 	url = https://github.com/mhinz/vim-tmuxify.git
+[submodule "vim/bundle/snippets"]
+	path = vim/bundle/snippets
+	url = https://github.com/honza/vim-snippets
+[submodule "vim/bundle/ultisnips-snippets"]
+	path = vim/bundle/ultisnips-snippets
+	url = https://github.com/honza/vim-snippets
