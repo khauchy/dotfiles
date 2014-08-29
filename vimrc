@@ -269,6 +269,12 @@ augroup END
 " TeX {{{
 
 let g:tex_flavor = "latex"
+imap <buffer> [[ \begin{
+imap <buffer> ]] <Plug>LatexCloseCurEnv
+nmap <buffer> <F5> <Plug>LatexChangeEnv
+vmap <buffer> <F7> <Plug>LatexWrapSelection
+vmap <buffer> <S-F7> <Plug>LatexEnvWrapSelection
+imap <buffer> (( \eqref{
 
 " }}}
 
@@ -284,13 +290,6 @@ let g:LatexBox_latexmk_options="-pdflatex='pdflatex' -pdf"
 let g:LatexBox_viewer="okular"
 let g:LatexBox_quickfix=2
 let g:LatexBox_split_width = 20
-
-imap <buffer> [[ \begin{
-imap <buffer> ]] <Plug>LatexCloseCurEnv
-nmap <buffer> <F5> <Plug>LatexChangeEnv
-vmap <buffer> <F7> <Plug>LatexWrapSelection
-vmap <buffer> <S-F7> <Plug>LatexEnvWrapSelection
-imap <buffer> (( \eqref{
 " }}}
 " Ultisnips {{{
 "let g:UltiSnipsEditSplit="vertical"
