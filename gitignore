@@ -30,6 +30,7 @@
 *.glo
 *.gls
 *.idx
+*.spl
 *.ilg
 *.ind
 *.ist
