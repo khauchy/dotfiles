@@ -131,7 +131,8 @@ let maplocalleader = "\\"
 
 syntax on
 set background=dark
-colorscheme hybrid
+let g:hybrid_use_Xresources = 1
+colorscheme apprentice
 " }}}
 " Status line {{{
 
@@ -275,6 +276,12 @@ nmap <buffer> <F5> <Plug>LatexChangeEnv
 vmap <buffer> <F7> <Plug>LatexWrapSelection
 vmap <buffer> <S-F7> <Plug>LatexEnvWrapSelection
 imap <buffer> (( \eqref{
+" This is awesome: conceals some text on the screen, like greek letters, \left,
+" \big, etc. We just don't want the su(b|per)scripts which look ugly.
+set cole=2
+let g:tex_conceal="adgm"
+hi Conceal guibg=#1d1f21 guifg=#c5c8c6
+" colors taken from the hybrid colorscheme
 
 " }}}
 

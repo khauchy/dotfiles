@@ -55,3 +55,6 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh
+[submodule "vim/bundle/apprentice"]
+	path = vim/bundle/apprentice
+	url = https://github.com/romainl/apprentice
