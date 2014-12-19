@@ -5,7 +5,7 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="gentoo"
 
 # Plugins
-plugins=(git battery)
+plugins=(git virtualenvwrapper)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.private.zshrc

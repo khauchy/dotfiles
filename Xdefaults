@@ -27,9 +27,7 @@ URxvt.lineSpace:            0
 
 ! Fonts
 URxvt.allow_bold:           false
-URxvt.font: xft:Inconsolata for Powerline:p
-
-ixelsize=15:antialias=true:hinting=true
+URxvt.font: xft:Inconsolata for Powerline:pixelsize=15:antialias=true:hinting=true
 URxvt.boldFont: xft:Inconsolata for Powerline:bold:pixelsize=15:antialias=true:hinting=true
 
 ! Fix font space

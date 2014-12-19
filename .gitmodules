@@ -58,3 +58,9 @@
 [submodule "vim/bundle/apprentice"]
 	path = vim/bundle/apprentice
 	url = https://github.com/romainl/apprentice
+[submodule "vim/bundle/lite-dfm"]
+	path = vim/bundle/lite-dfm
+	url = https://github.com/bilalq/lite-dfm
+[submodule "vim/bundle/goyo"]
+	path = vim/bundle/goyo
+	url = https://github.com/junegunn/goyo.vim

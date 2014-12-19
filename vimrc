@@ -256,6 +256,16 @@ augroup ft_markdown
 augroup END
 
 " }}}
+"
+" Sage {{{
+
+augroup ft_sage
+    au!
+
+    au BufNewFile,BufRead *.sage setlocal filetype=python
+augroup END
+" }}}
+
 " Vim {{{
 
 augroup ft_vim
@@ -270,12 +280,9 @@ augroup END
 " TeX {{{
 
 let g:tex_flavor = "latex"
-imap <buffer> [[ \begin{
-imap <buffer> ]] <Plug>LatexCloseCurEnv
 nmap <buffer> <F5> <Plug>LatexChangeEnv
 vmap <buffer> <F7> <Plug>LatexWrapSelection
 vmap <buffer> <S-F7> <Plug>LatexEnvWrapSelection
-imap <buffer> (( \eqref{
 " This is awesome: conceals some text on the screen, like greek letters, \left,
 " \big, etc. We just don't want the su(b|per)scripts which look ugly.
 set cole=2
@@ -306,7 +313,7 @@ inoremap <c-x><c-k> <c-x><c-k>
 
 " }}}
 " Startify {{{
-let g:startify_bookmarks = ['~/.vimrc', '~/.tmux.conf']
+let g:startify_bookmarks = ['~/.vimrc', '~/.tmux.conf', '~/Documents/super/report_comcom/report.tex']
 let g:startify_custom_header =
     \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
 " }}}
