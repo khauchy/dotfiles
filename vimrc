@@ -4,6 +4,7 @@
 
 " Preamble ---------------------------------------------------------------- {{{
 
+" Pathogen is awesome
 filetype off
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
@@ -131,7 +132,6 @@ let maplocalleader = "\\"
 
 syntax on
 set background=dark
-let g:hybrid_use_Xresources = 1
 colorscheme apprentice
 " }}}
 " Status line {{{
@@ -153,6 +153,10 @@ set statusline+=%y             " filetype
 set statusline+=%w             " preview
 set statusline+=\              " whitespace
 set statusline+=%{fugitive#statusline()} " fugitive
+set statusline+=\              " whitespace
+"set statusline+=%#warningmsg#  " Syntastic
+set statusline+=%{SyntasticStatuslineFlag()} " Syntastic
+set statusline+=\              " whitespace
 set statusline+=%{HasPaste()}  " paste mode enabled?
 set statusline+=%=             " split
 set statusline+=Col:\ \%c      " column number
@@ -192,6 +196,7 @@ autocmd BufEnter * silent! lcd %:p:h
 " }}}
 " Quick editing ----------------------------------------------------------- {{{
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>t :vsplit ~/Documents/notes/org/main.md<cr>
 " }}}
 " Searching and movement -------------------------------------------------- {{{
 
@@ -210,7 +215,7 @@ set virtualedit+=block
 
 noremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 
-" Made D and Y behave
+" Make D and Y behave
 nnoremap D d$
 nnoremap Y y$
 
@@ -257,15 +262,6 @@ augroup END
 
 " }}}
 "
-" Sage {{{
-
-augroup ft_sage
-    au!
-
-    au BufNewFile,BufRead *.sage setlocal filetype=python
-augroup END
-" }}}
-
 " Vim {{{
 
 augroup ft_vim
@@ -292,6 +288,14 @@ hi Conceal guibg=#1d1f21 guifg=#c5c8c6
 
 " }}}
 
+" Python {{{
+augroup ft_python
+    au!
+
+    au BufNewFile,BufRead *.py setlocal foldmethod=indent
+augroup END
+" }}}
+
 " }}}
 " Plugin settings --------------------------------------------------------- {{{
 
@@ -313,9 +317,17 @@ inoremap <c-x><c-k> <c-x><c-k>
 
 " }}}
 " Startify {{{
-let g:startify_bookmarks = ['~/.vimrc', '~/.tmux.conf', '~/Documents/super/report_comcom/report.tex']
+let g:startify_bookmarks = ['~/.vimrc', '~/.tmux.conf', '~/Documents/super/thesis/thesis.tex', '~/Documents/super/thesis/organisation/organisation.md']
 let g:startify_custom_header =
     \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
+" }}}
+" Syntastic {{{
+let g:syntastic_python_python_exec = '/usr/bin/python3'
+let g:syntastic_python_flake8_exec = 'python'
+let g:syntastic_python_flake8_args = ['-m', 'flake8']
+" }}}
+" Jedi {{{
+let g:jedi#use_tabs_not_buffers = 0
 " }}}
 " Mini-plugins ------------------------------------------------------------ {{{
 " Stuff that should probably be broken out into plugins, but hasn't proved to be
@@ -329,7 +341,7 @@ function! SynStack()
   echo join(map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")'), " > ")
 endfunc
 
-nnoremap <F7> :call SynStack()<CR>
+nnoremap <F6> :call SynStack()<CR>
 
 " }}}
 " Highlight Word {{{
@@ -413,4 +425,8 @@ else
     set mouse=a
 endif
 
+" }}}
+"
+" NeoVim specific {{{
+let g:python_host_prog='/usr/bin/python3'
 " }}}

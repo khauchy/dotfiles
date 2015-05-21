@@ -13,4 +13,5 @@ source ~/.private.zshrc
 # Aliases
 alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
-
+alias normalfont="printf '\33]50;%s\007' \"xft:Inconsolata for Powerline:pixelsize=15:antialias=true:hinting=true\""
+alias bigfont="printf '\33]50;%s\007' \"xft:Inconsolata for Powerline:pixelsize=30:antialias=true:hinting=true\""

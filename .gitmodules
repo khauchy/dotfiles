@@ -64,3 +64,6 @@
 [submodule "vim/bundle/goyo"]
 	path = vim/bundle/goyo
 	url = https://github.com/junegunn/goyo.vim
+[submodule "vim/bundle/sage"]
+	path = vim/bundle/sage
+	url = https://github.com/petRUShka/vim-sage
