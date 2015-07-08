@@ -1,0 +1,174 @@
+"vim: fdm=marker
+" File: nvimrc
+" Author: Paul Lajoie-Mazenc
+" Description: My vimrc
+" Last Modified: July 08, 2015
+
+call plug#begin('~/.nvim/plugged')
+" Colorscheme
+Plug 'romainl/apprentice'
+" LaTeX
+Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
+" Text snippets
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Buffalo: flying between buffers
+Plug 'dahu/vimple' | Plug 'Raimondi/vim-buffalo'
+" Git integration
+Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
+" Nice start page
+Plug 'mhinz/vim-startify'
+" Markdown syntax file 
+Plug 'plasticboy/vim-markdown'
+call plug#end()
+
+" Basic options {{{
+colorscheme apprentice
+
+set showcmd "shows current command and #lines selected in the bottom right
+set hidden "multiple hidden buffers
+set visualbell "beeping replaced by a visualbell
+set number "line numbers
+set history=1000 "instead of the default 50
+set list
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,nbsp:‗
+set showbreak=↪
+set splitbelow
+set splitright
+set autowrite " automatically write files when leaving them
+set autoread " automatically read files when leaving them and they are modified
+set shiftround " round indents to multiple of 'shiftwidth'
+set linebreak " Break lines at words boundaries
+set spellfile=~/.nvim/custom-ictionary.utf-8.add
+set colorcolumn=+1 " color column after 'textwidth'
+" Wait 10ms when the beginning of a command has been received; if nothing
+" happens, execute just this command
+set ttimeout
+set timeoutlen=10
+set ttimeoutlen=10
+
+set undofile " saves modifications to a file in order to be able undo them
+set backup
+set noswapfile
+set undodir=~/.nvim/tmp/undo//     " undo files
+set backupdir=~/.nvim/tmp/backup// " backups
+set directory=~/.nvim/tmp/swap//   " swap files
+
+set scrolloff=3 " keep at least 3 lines above/below the cursor
+set virtualedit+=block
+set conceallevel=2 " conceal
+let g:tex_conceal="adgm"
+hi Conceal guibg=#262626 guifg=#bcbcbc
+
+" Search/Replace {{{
+set ignorecase
+set smartcase
+set showmatch
+set gdefault " no need to add 'g' for replaces
+" }}}
+
+let mapleader = ","
+let maplocalleader = "\\"
+
+" Tabs etc {{{
+set tabstop=4 " a tab counts for 4 spaces
+set shiftwidth=2 " indent level: 2 spaces
+set softtabstop=2
+set expandtab " convert tabs into spaces
+set textwidth=80
+set formatoptions=qrn1j
+" }}}
+
+" Wildignore (files ignored in wildcompletion) {{{
+set wildignore+=.hg,.git                         " VC
+set wildignore+=*.aux,*.out,*.toc                " LaTeX
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.pyc                            " Python byte code
+" }}}
+" }}}
+
+" Statusline {{{
+function! HasPaste()
+    if &paste
+        return 'PASTE'
+    en
+    return ''
+endfunction
+
+set statusline=%<\             " begins with whitespace
+set statusline+=%t             " filename
+set statusline+=\              " whitespace
+set statusline+=%m             " modified
+set statusline+=%r             " read-only
+set statusline+=%y             " filetype
+set statusline+=%w             " preview
+set statusline+=\              " whitespace
+set statusline+=%{fugitive#statusline()} " fugitive
+set statusline+=\              " whitespace
+"set statusline+=%{SyntasticStatuslineFlag()} " Syntastic
+"set statusline+=\              " whitespace
+set statusline+=%{HasPaste()}  " paste mode enabled?
+set statusline+=%=             " split
+set statusline+=Col:\ \%c      " column number
+set statusline+=\              " whitespace
+set statusline+=Lin:\ \%l\/\%L " line number/total
+set statusline+=\              " ends with whitespace
+" }}}
+
+" Convenience mappings {{{
+" Typos (ie more than two spaces, trailing spaces, lines longer than 80 chars)
+nnoremap me /^[^%].*\S.*\zs\s\{2,\}\\|\zs\s$\\|^[^%]\zs.\{80,\}<cr>
+
+noremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
+
+nnoremap Y y$ " make Y behave like D
+" Saner navigation
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+" Buffer navigation
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+" Space to toggle folds.
+nnoremap <Space> za
+vnoremap <Space> za
+" }}}
+
+" Plugin specifics {{{
+" LaTeX-Box {{{
+" Enable folding of tex files
+let g:LatexBox_Folding=1
+" }}}
+" Ultisnips {{{
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "vim-snippets"]
+inoremap <c-x><c-k> <c-x><c-k>
+" Markdown {{{
+" Treat *.md files as markdown
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+
+" `$' is treated as math code
+let g:vim_markdown_math=1
+" }}}
+" }}}
+" Python program{{{
+let g:python_host_prog='/usr/bin/python3'
+" }}}
+" Startify {{{
+let g:startify_bookmarks = ['~/.nvim/nvimrc', '~/.tmux.conf', '~/Documents/super/thesis/thesis.tex', '~/Documents/super/thesis/organisation/organisation.md']
+" Because fortune is nice
+let g:startify_custom_header =
+    \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
+" }}}
+" Mini-plugins {{{
+" Shows the stack of syntax hilighting on a cursor
+function! SynStack()
+  echo join(map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")'), " > ")
+endfunc
+
+nnoremap <F6> :call SynStack()<CR>
+" }}}

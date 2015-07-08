@@ -132,7 +132,7 @@ let maplocalleader = "\\"
 
 syntax on
 set background=dark
-colorscheme apprentice
+" The colorscheme is defined with the GUI
 " }}}
 " Status line {{{
 
@@ -175,7 +175,7 @@ nnoremap mw /\S\zs\s\{2,\}<cr>
 " Locate all possible errors (multiple whitespaces, trailing whitespace,
 " long lines)
 " I needed to double escape pipes, I don't know why...
-nnoremap me /^[^%]\S.*\zs\s\{2,\}\\|\zs\s$\\|^[^%]\zs.\{80,\}<cr>
+nnoremap me /^[^%].*\S.*\zs\s\{2,\}\\|\zs\s$\\|^[^%]\zs.\{80,\}<cr>
 
 " Formatting, TextMate-style
 nnoremap Q gqip
@@ -317,7 +317,7 @@ inoremap <c-x><c-k> <c-x><c-k>
 
 " }}}
 " Startify {{{
-let g:startify_bookmarks = ['~/.vimrc', '~/.tmux.conf', '~/Documents/super/thesis/thesis.tex', '~/Documents/super/thesis/organisation/organisation.md']
+let g:startify_bookmarks = ['~/.vim/.vimrc', '~/.tmux.conf', '~/Documents/super/thesis/thesis.tex', '~/Documents/super/thesis/organisation/organisation.md']
 let g:startify_custom_header =
     \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
 " }}}
@@ -420,6 +420,8 @@ if has('gui_running')
     set guicursor=n-c:block-Cursor-blinkon0
     set guicursor+=v:block-vCursor-blinkon0
     set guicursor+=i-ci:ver80-Cursor
+
+    colorscheme apprentice
 else
     " Console Vim
     set mouse=a
